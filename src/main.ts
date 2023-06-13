@@ -5,6 +5,7 @@ const input = document.querySelector("input") as HTMLInputElement;
 const MusicDetails = document.querySelector(".song-info") as HTMLDivElement;
 const MusicImage = document.querySelector(".song-image") as HTMLImageElement;
 
+
 const showLoadingState = () => {
   MusicImage.style.display = "none";
   MusicDetails.innerHTML = "<p>Loading...</p>";
@@ -45,8 +46,8 @@ const MusicPlayer = async () => {
 };
 
 const handleInputChange = () => {
-  if (input.value === "") {
-    MusicDetails.innerHTML = "<p>type something</p>"
+  if (input.value.trim().length < 4) {
+    MusicDetails.innerHTML = "<p>dzma momindome</p>"
     MusicImage.style.display = "none";
   } else {
     showLoadingState();
