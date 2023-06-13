@@ -18,34 +18,36 @@ const MusicPlayer = async () => {
       `https://deezer-cors-server-production.up.railway.app/api/${search}`
     );
 
-    if (!response.data || response.data.length === 0) {
-      MusicDetails.innerHTML = "<p>Music Not Found</p>";
-    } else {
-      const title: string = response.data.data[0].title;
-      const image: string = response.data.data[0].album.cover;
-      const previewMusic: string = response.data.data[0].preview;
-      const musicArtist: string = response.data.data[0].artist.name;
-
-      MusicDetails.innerHTML = `
-        <p class="music-title">Music Name: <span>${title}</span></p>
-        <p class="music-artist">Music Artist: <span>${musicArtist}</span></p>
-        <audio controls>
-          <source src="${previewMusic}" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>`;
-
-      MusicImage.style.display = "block";
-      MusicImage.style.backgroundImage = `url(${image})`;
+    if (!response.data.data.length) {
+      MusicDetails.innerHTML = "<p>Music not found. 😢</p>";
+      MusicImage.style.display = "none";
+      return;
     }
+
+    const title: string = response.data.data[0].title;
+    const image: string = response.data.data[0].album.cover;
+    const previewMusic: string = response.data.data[0].preview;
+    const musicArtist: string = response.data.data[0].artist.name;
+
+    MusicDetails.innerHTML = `
+      <p class="music-title">Music Name: <span>${title}</span></p>
+      <p class="music-artist">Music Artist: <span>${musicArtist}</span></p>
+      <audio controls>
+        <source src="${previewMusic}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>`;
+
+    MusicImage.style.display = "block";
+    MusicImage.style.backgroundImage = `url(${image})`;
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 };
 
 const handleInputChange = () => {
   if (input.value === "") {
-    MusicDetails.innerHTML = "<p>Please enter song name. 🙏</p>"
-    MusicImage.style.display = "none"; 
+    MusicDetails.innerHTML = "<p>type something</p>"
+    MusicImage.style.display = "none";
   } else {
     showLoadingState();
     MusicPlayer();
@@ -53,8 +55,8 @@ const handleInputChange = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  MusicDetails.innerHTML = "<p>Please enter song name. 🙏</p>";
-  MusicImage.style.display = "none"; 
+  MusicDetails.innerHTML = "<p>Gamarjoba</p>";
+  MusicImage.style.display = "none";
 });
 
 input.addEventListener("input", debounce(handleInputChange, 1000));
