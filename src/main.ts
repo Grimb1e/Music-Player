@@ -57,7 +57,4 @@ document.addEventListener("DOMContentLoaded", () => {
   MusicImage.style.display = "none"; 
 });
 
-input.addEventListener("input", debounce(handleInputChange, 100));
-
-
-input.addEventListener("input", debounce(handleInputChange, 100));
+input.addEventListener("input", debounce(handleInputChange, 1000));
